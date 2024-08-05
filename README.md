@@ -63,12 +63,6 @@ yarn run dev
 
 The server will start on the port specified in your `.env.development.local` file.
 
-## Adding a Video
-
-You can embed a video to provide a visual walkthrough or demonstration. Here’s an example of how to embed a YouTube video:
-
-Replace `<video-id>` with the actual ID of your YouTube video. Clicking the thumbnail will open the video in YouTube.
-
 ## Contributing
 
 1. Fork the repository.
