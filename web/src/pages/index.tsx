@@ -147,10 +147,7 @@ export default function Home() {
                   <FormItem>
                     <FormLabel>Name</FormLabel>
                     <FormControl>
-                      <Input
-                        placeholder="Math study"
-                        {...field}
-                      />
+                      <Input placeholder="Math study" {...field} />
                     </FormControl>
                     <FormDescription>The name of the paper.</FormDescription>
                     <FormMessage />
@@ -184,7 +181,9 @@ export default function Home() {
                   />
                 </CollapsibleContent>
               </Collapsible>
-              <Button type="submit" disabled={loading}>Submit</Button>
+              <Button type="submit" disabled={loading}>
+                Submit
+              </Button>
             </form>
           </Form>
         </div>
@@ -211,63 +210,64 @@ export default function Home() {
                   </FormItem>
                 )}
               />
-              <Button type="submit" disabled={loading}>Submit</Button>
+              <Button type="submit" disabled={loading}>
+                Submit
+              </Button>
             </form>
           </Form>
         </div>
       </div>
-      <div className="flex flex-row gap-5 mx-auto mt-3">
-        {notes && notes.length > 0 && (
-          <div className="flex flex-col gap-2 max-w-[600px]">
-            <h2>Notes</h2>
-            <div className="flex flex-col gap-2">
-              {notes.map((note, index) => (
-                <div className="flex flex-col gap-2 p-2" key={index}>
-                  <p>
-                    {index + 1}. {note.note}
-                  </p>
-                  <p className="text-sm text-gray-600">
-                    [{note.pageNumbers.join(", ")}]
-                  </p>
-                </div>
-              ))}
-            </div>
+      {loading ? (
+        <div className="flex items-center space-x-4">
+          <Skeleton className="h-12 w-12 rounded-full" />
+          <div className="space-y-2">
+            <Skeleton className="h-4 w-[250px]" />
+            <Skeleton className="h-4 w-[200px]" />
           </div>
-        )}
-        {
-          loading ? (
-            <div className="flex items-center space-x-4">
-              <Skeleton className="h-12 w-12 rounded-full" />
-              <div className="space-y-2">
-                <Skeleton className="h-4 w-[250px]" />
-                <Skeleton className="h-4 w-[200px]" />
+        </div>
+      ) : (
+        <div className="flex flex-row gap-5 mx-auto mt-3">
+          {notes && notes.length > 0 && (
+            <div className="flex flex-col gap-2 max-w-[600px]">
+              <h2>Notes</h2>
+              <div className="flex flex-col gap-2">
+                {notes.map((note, index) => (
+                  <div className="flex flex-col gap-2 p-2" key={index}>
+                    <p>
+                      {index + 1}. {note.note}
+                    </p>
+                    <p className="text-sm text-gray-600">
+                      [{note.pageNumbers.join(", ")}]
+                    </p>
+                  </div>
+                ))}
               </div>
             </div>
-          )
-            : answers && answers.length > 0 && (
-              <div className="flex flex-col gap-2 max-w-[600px]">
-                <h2>Answers</h2>
-                <div className="flex flex-col gap-2">
-                  {answers.map((answer, index) => (
-                    <div className="flex flex-col gap-2 p-2" key={index}>
-                      <p>
-                        {index + 1}. {answer.answer}
-                      </p>
-                      <p>Followup questions:</p>
-                      <div className="flex flex-col gap-2 p-2">
-                        {answer.followupQuestions.map((followup, index) => (
-                          <p key={index} className="text-sm text-gray-600">
-                            {followup}
-                          </p>
-                        ))}
-                      </div>
+          )}
+          {answers && answers.length > 0 && (
+            <div className="flex flex-col gap-2 max-w-[600px]">
+              <h2>Answers</h2>
+              <div className="flex flex-col gap-2">
+                {answers.map((answer, index) => (
+                  <div className="flex flex-col gap-2 p-2" key={index}>
+                    <p>
+                      {index + 1}. {answer.answer}
+                    </p>
+                    <p>Followup questions:</p>
+                    <div className="flex flex-col gap-2 p-2">
+                      {answer.followupQuestions.map((followup, index) => (
+                        <p key={index} className="text-sm text-gray-600">
+                          {followup}
+                        </p>
+                      ))}
                     </div>
-                  ))}
-                </div>
+                  </div>
+                ))}
               </div>
-            )
-        }
-      </div>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }
