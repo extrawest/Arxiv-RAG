@@ -4,19 +4,26 @@
 
 ## Introduction
 
-Arxiv RAG is a web application and API designed for generating notes and answering questions on Arxiv papers using Large Language Models (LLMs). This project leverages the Unstructured API for parsing and chunking PDFs and Supabase for the PostgreSQL database and querying embeddings.
+Arxiv RAG (Retriever-Augmented Generation) is a sophisticated web application and API designed for generating notes and answering questions on Arxiv papers using advanced AI technologies. The application leverages Large Language Models (LLMs) to process and understand scientific papers, providing users with insightful summaries and answers to complex queries. The Unstructured API is utilized for parsing and chunking PDFs, allowing for efficient handling and analysis of large documents. Additionally, Supabase is employed to manage the PostgreSQL database, which is integral for storing document embeddings and performing efficient queries.
+
+The primary aim of Arxiv RAG is to facilitate easier access to and understanding of scientific literature, empowering researchers, students, and enthusiasts to quickly glean important information from vast amounts of data.
 
 ## Features
 
-- Extract and analyze text from PDF documents.
-- Use OpenAI for generating insights and responses.
-- Store and manage data using Supabase.
+- **PDF Text Extraction and Analysis**: Utilizing the Unstructured API, Arxiv RAG can parse and chunk PDF documents into manageable pieces, enabling thorough analysis of scientific papers.
+  
+- **Insight Generation with OpenAI**: The application leverages OpenAI's powerful language models to generate insightful summaries and responses. These models are fine-tuned to understand the context of scientific literature, providing accurate and meaningful insights.
+
+- **Data Management with Supabase**: Supabase, an open-source Firebase alternative, is used to manage the PostgreSQL database. This database stores the parsed document data, embeddings, and question-answer pairs, enabling efficient querying and retrieval of information.
+
+- **Embeddings and Document Matching**: Arxiv RAG uses embeddings to represent documents in a high-dimensional space, allowing for efficient similarity searches. This is crucial for retrieving relevant information based on user queries.
+
+- **Question Answering System**: The application includes a robust question-answering system that can handle complex queries about the content of Arxiv papers. By leveraging the stored embeddings and context from the documents, the system provides accurate and contextually relevant answers.
 
 ## Setup
 
 ### Prerequisites
 
-- Docker
 - Node.js
 - Yarn package manager
 - Supabase account
