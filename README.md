@@ -1,6 +1,6 @@
 # Arxiv RAG
 
-![](https://github.com/Nariman-Mamutov-ew/AI-pdf-analyser/raw/main/preview.gif)
+![](https://raw.githubusercontent.com/extrawest/Arxiv-RAG/main/preview.gif)
 
 ## Introduction
 
