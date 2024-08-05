@@ -2,7 +2,7 @@
 
 ```markdown
 ## Project Demo
-[![Watch the video]()]()
+[![Watch the video]()](https://github.com/Nariman-Mamutov-ew/AI-pdf-analyser/raw/main/preview.webm)
 ```
 
 ## Project Overview
