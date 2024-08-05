@@ -1,18 +1,91 @@
-# Monorepo template
+# AI PDF Analyser
 
-## Development
+```markdown
+## Project Demo
+[![Watch the video]()]()
+```
 
-This monorepo uses Turborepo to manage the two packages (web, api).
-To build all packages run `yarn build` from root.
+## Project Overview
 
-To build a specific package run `yarn build --filter=<PACKAGE_NAME>`
+**AI PDF Analyser** is a project designed to analyze PDF documents using various AI tools and services. The project leverages APIs from OpenAI, Unstructured, and Supabase for text extraction, processing, and storage.
 
-To start the API server run `yarn start:api`.
-Similarly, to start the web server run `yarn start:web`.
+## Features
 
-The API is an Express.js server written in TypeScript.
-It comes with out of the box support for Supabase.
-If you are not developing with Supabase, delete the `gen:supabase:types` script.
-If you are using Supabase, replace the `<YOUR_PROJECT_ID>` placeholder with your project ID.
+- Extract and analyze text from PDF documents.
+- Use OpenAI for generating insights and responses.
+- Store and manage data using Supabase.
 
-The web project is a default Next.js app with Tailwind CSS and TypeScript.
+## Prerequisites
+
+Make sure you have the following installed:
+
+- Node.js (v14 or later)
+- TypeScript
+
+## Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone <repository-url>
+   cd AI-PDF-Analyser
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+3. Create a `.env.development.local` file based on the provided `.env.example` and fill in your API keys and configuration details:
+
+   ```bash
+   cp .env.example .env.development.local
+   ```
+
+## Environment Variables
+
+The following environment variables need to be set in your `.env.development.local` file:
+
+```
+UNSTRUCTURED_API_KEY=
+OPENAI_API_KEY=
+SUPABASE_PRIVATE_KEY=
+SUPABASE_URL=
+PORT=
+UNSTRUCTURED_API_URL=
+```
+
+## Running the Project
+
+To start the development server:
+
+```bash
+yarn run dev
+```
+
+The server will start on the port specified in your `.env.development.local` file.
+
+## Adding a Video
+
+You can embed a video to provide a visual walkthrough or demonstration. Here’s an example of how to embed a YouTube video:
+
+Replace `<video-id>` with the actual ID of your YouTube video. Clicking the thumbnail will open the video in YouTube.
+
+## Contributing
+
+1. Fork the repository.
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`).
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`).
+4. Push to the branch (`git push origin feature/AmazingFeature`).
+5. Open a pull request.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Acknowledgements
+
+- [OpenAI](https://www.openai.com/)
+- [Unstructured](https://unstructured.io/)
+- [Supabase](https://supabase.io/)
