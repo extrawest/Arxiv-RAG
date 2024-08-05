@@ -1,10 +1,8 @@
-# AI PDF Analyser
+# Arxiv RAG
 
-![](https://github.com/Nariman-Mamutov-ew/AI-pdf-analyser/raw/main/preview.gif)
+## Introduction
 
-## Project Overview
-
-**AI PDF Analyser** is a project designed to analyze PDF documents using various AI tools and services. The project leverages APIs from OpenAI, Unstructured, and Supabase for text extraction, processing, and storage.
+Arxiv RAG is a web application and API designed for generating notes and answering questions on Arxiv papers using Large Language Models (LLMs). This project leverages the Unstructured API for parsing and chunking PDFs and Supabase for the PostgreSQL database and querying embeddings.
 
 ## Features
 
@@ -12,37 +10,19 @@
 - Use OpenAI for generating insights and responses.
 - Store and manage data using Supabase.
 
-## Prerequisites
+## Setup
 
-Make sure you have the following installed:
+### Prerequisites
 
-- Node.js (v14 or later)
-- TypeScript
+- Docker
+- Node.js
+- Yarn package manager
+- Supabase account
+- Unstructured API key
 
-## Installation
+### Environment Configuration
 
-1. Clone the repository:
-
-   ```bash
-   git clone <repository-url>
-   cd AI-PDF-Analyser
-   ```
-
-2. Install dependencies:
-
-   ```bash
-   yarn install
-   ```
-
-3. Create a `.env.development.local` file based on the provided `.env.example` and fill in your API keys and configuration details:
-
-   ```bash
-   cp .env.example .env.development.local
-   ```
-
-## Environment Variables
-
-The following environment variables need to be set in your `.env.development.local` file:
+Create a `.env.development.local` file in the `./api` directory with the following content:
 
 ```
 UNSTRUCTURED_API_KEY=
@@ -53,30 +33,98 @@ PORT=
 UNSTRUCTURED_API_URL=
 ```
 
-## Running the Project
+### Database Setup in Supabase
 
-To start the development server:
+Execute the following SQL commands in your Supabase project to set up the required database structure:
 
-```bash
-yarn run dev
+```sql
+-- Enable the pgvector extension
+create extension vector;
+
+-- Create tables for storing Arxiv papers, embeddings, and question answering data
+CREATE TABLE arxiv_papers (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  created_at TIMESTAMPTZ DEFAULT now(),
+  paper TEXT,
+  arxiv_url TEXT,
+  notes JSONB[],
+  name TEXT
+);
+
+CREATE TABLE arxiv_embeddings (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  created_at TIMESTAMPTZ DEFAULT now(),
+  content TEXT,
+  embedding vector,
+  metadata JSONB
+);
+
+CREATE TABLE arxiv_question_answering (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  created_at TIMESTAMPTZ DEFAULT now(),
+  question TEXT,
+  answer TEXT,
+  followup_questions TEXT[],
+  context TEXT
+);
+
+-- Create a function for document matching
+create function match_documents (
+  query_embedding vector(1536),
+  match_count int DEFAULT null,
+  filter jsonb DEFAULT '{}'
+) returns table (
+  id UUID,
+  content text,
+  metadata jsonb,
+  embedding vector,
+  similarity float
+)
+language plpgsql
+as $$
+#variable_conflict use_column
+begin
+  return query
+  select
+    id,
+    content,
+    metadata,
+    embedding,
+    1 - (arxiv_embeddings.embedding <=> query_embedding) as similarity
+  from arxiv_embeddings
+  where metadata @> filter
+  order by arxiv_embeddings.embedding <=> query_embedding
+  limit match_count;
+end;
+$$;
 ```
 
-The server will start on the port specified in your `.env.development.local` file.
+### Supabase Type Generation
 
-## Contributing
+Add your project ID to the Supabase generate types script in package.json:
 
-1. Fork the repository.
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`).
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`).
-4. Push to the branch (`git push origin feature/AmazingFeature`).
-5. Open a pull request.
+```json
+{
+  "gen:supabase:types": "touch ./src/generated.ts && supabase gen types typescript --schema public > ./src/generated.ts --project-id <YOUR_PROJECT_ID>"
+}
+```
 
-## License
+## Running the Application
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+### Build the API Server
 
-## Acknowledgements
+```shell
+yarn build
+```
 
-- [OpenAI](https://www.openai.com/)
-- [Unstructured](https://unstructured.io/)
-- [Supabase](https://supabase.io/)
+### Start the API Server
+
+```shell
+yarn start:api
+```
+
+### Start the Web Server
+
+```shell
+yarn start:web
+```
