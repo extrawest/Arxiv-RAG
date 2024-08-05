@@ -1,8 +1,13 @@
 # Arxiv RAG
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)]()
+[![Maintaner](https://img.shields.io/static/v1?label=Nariman%20Mamutov&message=Maintainer&color=red)](mailto:nairman.mamutov@extrawest.com)
+[![Ask Me Anything !](https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg)]()
+![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)
+![GitHub release](https://img.shields.io/badge/release-v1.0.0-blue)
 
 ![](https://raw.githubusercontent.com/extrawest/Arxiv-RAG/main/preview.gif)
 
-## Introduction
+## About
 
 Arxiv RAG (Retriever-Augmented Generation) is a sophisticated web application and API designed for generating notes and answering questions on Arxiv papers using advanced AI technologies. The application leverages Large Language Models (LLMs) to process and understand scientific papers, providing users with insightful summaries and answers to complex queries. The Unstructured API is utilized for parsing and chunking PDFs, allowing for efficient handling and analysis of large documents. Additionally, Supabase is employed to manage the PostgreSQL database, which is integral for storing document embeddings and performing efficient queries.
 
