@@ -31,7 +31,7 @@ Make sure you have the following installed:
 2. Install dependencies:
 
    ```bash
-   npm install
+   yarn install
    ```
 
 3. Create a `.env.development.local` file based on the provided `.env.example` and fill in your API keys and configuration details:
